@@ -1,0 +1,64 @@
+buildscript {
+  repositories {
+    maven {
+      url "http://adcm7108.adcbmis.local:8080/repository/internal/"
+    }
+  }
+  dependencies {
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:2.2.6.RELEASE"
+    classpath "io.spring.gradle:dependency-management-plugin:1.0.9.RELEASE"
+  }
+}
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+
+
+repositories {
+	flatDir {
+       dirs 'lib'
+   	}
+    maven{
+        url "http://adcm7108.adcbmis.local:8080/repository/internal/"
+    }
+    
+}
+
+dependencies {
+	compile name:'commons-codec-1.9'
+	compile name:'commons-collections-3.2.2'
+	compile name:'cxf-rt-transports-http-3.4.0'
+	compile name:'libthrift-0.9.3'
+	compile name:'rt'
+	compile name:'httpcore-4.4.13'
+	compile name:'httpclient-4.5.12'
+	compile name:'hadoop-auth-3.1.0'
+	compile name:'hadoop-common-3.1.0'
+	compile name:'hadoop-core-1.2.1'
+	compile name:'hadoop-mapreduce-client-core-2.7.2'
+	compile name:'hive-exec-1.1.0'
+	compile name:'hive-jdbc-0.14.0.2.2.6.4-1'
+	compile name:'hive-service-0.14.0'
+	compile name:'hive-service-rpc-3.0.0'
+	//compile name:'hive-metastore-3.0.0'
+	compile name:'curator-client-4.0.1'
+	implementation (group:'adcb',name: 'ojdbc', version: '6-1.0')
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    //compile group: 'org.springframework', name: 'spring-jdbc'
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//providedRuntime 'org.springframework.boot:spring-boot-devtools'
+	//annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+/*configurations {
+	all {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+		exclude group: 'ch.qos.logback', module: 'logback-classic'
+	}
+}*/
